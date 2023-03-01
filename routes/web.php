@@ -19,3 +19,10 @@ Route::get('/', function () {
 
 Route::get('/alumnos',[AlumnosController::class,'index'])
     ->name('alumnos.index');
+
+Route::get('/alumnos/create', [AlumnosController::class,'create'])
+    ->name('alumnos.create');
+
+Route::post('/alumnos', [AlumnosController::class,'store'])
+    ->name('alumnos.store');
+  

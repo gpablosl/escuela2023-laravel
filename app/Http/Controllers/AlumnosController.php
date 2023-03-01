@@ -15,4 +15,14 @@ class AlumnosController extends Controller
         
         return view('alumnos.index',$argumentos);
     }
+
+    public function create(){
+        $argumentos = array();
+        return view('alumnos.create',$argumentos);
+    }
+
+    public function store(Request $request){
+        $nuevoAlumno = new Alumno();
+        $nuevoAlumno->nombre = $request->input('');
+    }
 }
