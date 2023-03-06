@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear alumno</title>
+    <title>Editar alumno</title>
 </head>
 <body>
-    <h1> Crear alumno </h1>
+    <h1> Editar alumno </h1>
+
     <a href="{{route('alumnos.index')}}">Volver a la lista de alumnos</a>
-    <form action="{{route('alumnos.store')}}" method="POST">
+    <form action="{{route('alumnos.update',$alumno->id)}}" method="POST">
         @csrf
+        @method('put')
         <div>
             <label>Nombre: </label>
-            <input type="text" name="nombre">
+            <input type="text" name="nombre",value="{{$alumno->nombre}}">
         </div>
         <div>
-            <button type="submit">Crear alumno</button>
+            <button type="submit">Editar alumno</button>
         </div>
     </form>
-
+    @if(Session::has('exito'))
+        <p>{{Session::get('exito')}}</p>
+    @endif
 </body>
 </html>
