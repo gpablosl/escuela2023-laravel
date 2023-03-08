@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>lista de alumnos</title>
 </head>
 <body>
     <h1>Lista de alumnos</h1>
+    @if(Session::has('exito'))
+        <p>{{Session::get('exito')}}</p>
+    @endif
     <a href="{{route('alumnos.create')}}">Crear alumno</a>
     <table> 
         <thead>
@@ -21,7 +24,7 @@
                     <td>{{$alumno->nombre}}</td>
                     <td>
                         <a href="{{route('alumnos.edit',$alumno->id)}}">Editar</a>
-                        <button>Eliminar</button>
+                        <a href="{{route('alumnos.delete',$alumno->id)}}">Eliminar</a>
                     </td>
                 </tr>
                 @endforeach
