@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\Models\Alumno;
 use App\Models\Carrera;
 
-
-use Illuminate\Http\Request;
-
 class AlumnosController extends Controller
 {
-    public function index(){
+    public function index() {
         $alumnos = Alumno::all();
+
+        $argumentos = array();
         $argumentos['alumnos'] = $alumnos;
-        return view("alumnos.index", $argumentos);
+
+        return view('alumnos.index',$argumentos);
     }
 
     public function create() {
@@ -27,23 +29,28 @@ class AlumnosController extends Controller
         $nuevoAlumno->nombre = $request->input('nombre');
         
         $nuevoAlumno->save();
-        return redirect()->route('alumnos.index');
+        return redirect()->route('alumnos.index')
+            ->with('exito','Alumno creado exitosamente');
     }
 
-    public function edit($id){
-
-            $alumno = Alumno::find($id);        
-            $argumentos = array();
-            $argumentos['alumno'] = $alumno;
-            return view('alumnos.edit', $argumentos);
-    }
-    
-    public function update(Request $request,$id) {
+    //Estamos recibiendo parámetros de ruta a través de
+    //parámetros de función
+    public function edit($id) {
         $alumno = Alumno::find($id);
+        $argumentos = array();
+        $argumentos['alumno'] = $alumno;
+        return view('alumnos.edit',$argumentos);
+    }
+
+    public function update(Request $request,$id) {
+        //busca al alumno
+        $alumno = Alumno::find($id);
+        //Actualiza sus datos en base a los valores del form
         $alumno->nombre = $request->input('nombre');
         
         $alumno->save();
-        return redirect()->route('alumnos.edit',$id)->with('exito','El alumno se ha actualizado exitosamente');
+        return redirect()->route('alumnos.edit',$id)
+            ->with('exito','El alumno se ha actualizado exitosamente');
     }
 
     public function delete($id) {
@@ -55,10 +62,17 @@ class AlumnosController extends Controller
         return view('alumnos.delete',$argumentos);
     }
 
-    public function destroy(Request $request, $id){
+    public function destroy(Request $request, $id) {
         $alumno = Alumno::find($id);
-        $feedback = "Se elimino correctamente a : ".$alumno->nombre;
+        $feedback = "Se elimino correctamenta a: " . $alumno->nombre;
         $alumno->delete();
-        return redirect()->route('alumnos.index')->with('exito',$feedback);
+        return redirect()->route('alumnos.index')
+            ->with('exito',$feedback);
     }
+
+    public function prueba() {
+        return view('prueba');
+    }
+
+    
 }

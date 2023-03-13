@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Alumno extends Model
 {
     use HasFactory;
+    //Especificar a que tabla se conecta
     protected $table = 'alumnos';
 }

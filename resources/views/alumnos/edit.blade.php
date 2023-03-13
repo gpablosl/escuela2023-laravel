@@ -8,21 +8,21 @@
 </head>
 <body>
     <h1> Editar alumno </h1>
-
+    @if(Session::has('exito'))
+        <p>{{Session::get('exito')}}</p>
+    @endif
     <a href="{{route('alumnos.index')}}">Volver a la lista de alumnos</a>
     <form action="{{route('alumnos.update',$alumno->id)}}" method="POST">
         @csrf
         @method('put')
         <div>
             <label>Nombre: </label>
-            <input type="text" name="nombre",value="{{$alumno->nombre}}">
+            <input type="text" name="nombre" value="{{$alumno->nombre}}">
         </div>
         <div>
-            <button type="submit">Editar alumno</button>
+            <button type="submit">Actualizar alumno</button>
         </div>
     </form>
-    @if(Session::has('exito'))
-        <p>{{Session::get('exito')}}</p>
-    @endif
+
 </body>
 </html>

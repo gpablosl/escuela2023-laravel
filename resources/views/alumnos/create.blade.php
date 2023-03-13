@@ -16,7 +16,7 @@
             <input type="text" name="nombre">
         </div>
         <div>
-            <label>Carrera: </label>
+            <label>Carrera:</label>
             <select name="carrera">
                 <option value="" selected disabled>Elige una carrera</option>
                 @foreach($carreras as $carrera)
